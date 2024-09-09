@@ -1,0 +1,43 @@
+name: CI Pipeline
+on:
+  pull_request:
+    branches:
+      - devel
+      - stage
+      - prod
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '15.x'
+        npm-version: '7.x'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run ESLint
+      run: npm run lint
+
+    - name: Run Prettier
+      run: npm run prettier
+
+    - name: Run Jest Tests
+      env:
+        CI: true
+      run: npm run test
+
+    - name: Build the project
+      run: npm run build
+
+    - name: ls
+      run: ls
+
