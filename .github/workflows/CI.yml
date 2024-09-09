@@ -31,9 +31,13 @@ jobs:
       run: npm run prettier
 
     - name: Run Jest Tests
-      # env:
-      #   CI: true
+      env:
+        CI: true
       run: npm run test
 
     - name: Build the project
       run: npm run build
+
+    - name: ls
+      run: ls
+
